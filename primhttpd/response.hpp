@@ -22,10 +22,12 @@ class http_response
 public:
     http_response ();
     http_response (int const status_code);
-    void add_status(int const status_code, std::string status_message = "");
-    void add_body (std::string body);
-    void add_header (std::string name, std::string value);
+    void set_status(int const status_code, std::string status_message = "");
+    void set_body (std::string body);
+    void set_header (std::string name, std::string value);
+    std::string get_header(std::string header_name);
     std::string text();
+    
     std::string status_line;
     std::map<std::string, std::string> headers;
     std::string body;

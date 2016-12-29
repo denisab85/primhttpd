@@ -28,7 +28,6 @@ bool cgi_engine::parse_request (http_request * request)
     //    std::map<std::string, std::string>::iterator item;
     
     set_env_value("REQUEST_METHOD", request->request_method.c_str());
-    puts(getenv("REQUEST_METHOD"));
 
     set_env_value("REQUEST_URI", request->request_uri.c_str());
     set_env_value("SERVER_PROTOCOL", request->server_protocol.c_str());
@@ -78,7 +77,7 @@ bool cgi_engine::parse_response (std::string text, http_response * response)
         }
         else
             status = 200;
-        response->add_status(status);
+        response->set_status(status);
         for (int i = 1; i < lines.size(); i++)
             //std::vector<std::string>::iterator line = lines.begin(); line != lines.end(); ++line)
         {
@@ -92,7 +91,7 @@ bool cgi_engine::parse_response (std::string text, http_response * response)
                     {
                         name = elements[0];
                         value = elements[1];
-                        response->add_header(name, value);
+                        response->set_header(name, value);
                     }
                 }
                 else if (empty_lines == 1)
@@ -103,7 +102,7 @@ bool cgi_engine::parse_response (std::string text, http_response * response)
             else
                 empty_lines++;
         }
-        response->add_body(body);
+        response->set_body(body);
     }
     return true;
 }
@@ -120,13 +119,11 @@ bool cgi_engine::process (http_request * request, http_response * response)
     
     if (request && response)
     {
-        file_path.append (this->cgi_root);
-        file_path.append (request->resource_path);
-        if ( file_exists (file_path) )
+        file_path = path_join (path_parent(this->cgi_root), request->resource_path);
+        if ( test_path(file_path) == IS_FILE )
         {
             if (this->parse_request(request))
             {
-                puts(getenv("REQUEST_METHOD"));
                 output = exec (file_path.c_str());
                 result = this->parse_response(output, response);
             }

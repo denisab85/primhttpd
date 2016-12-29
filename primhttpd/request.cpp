@@ -72,7 +72,7 @@ bool http_request::process(char * const buffer, size_t const len)
                     if (! strcmp(name, "Host"))
                     {
                         value = strtok(NULL, ":");
-                        this->headers.insert(std::pair<std::string, std::string>("Post", value));
+                        this->headers.insert(std::pair<std::string, std::string>("Host", value));
                         
                         value = strtok(NULL, ":");
                         this->headers["Port"] = value;
@@ -124,4 +124,13 @@ bool http_request::process(char * const buffer, size_t const len)
         i++;
     }
     return true;
+}
+
+
+std::string http_request::get_header(std::string header_name)
+{
+    if (this->headers.find(header_name) != this->headers.end())
+        return this->headers[header_name];
+    else return "";
+    
 }

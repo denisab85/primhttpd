@@ -13,6 +13,9 @@ std::map<int, std::string> status_codes = { {100, "Continue"}, {101, "Switching 
 std::string http_response::text()
 {
     std::string text;
+
+    if (this->body.length())
+        this->set_header("Content-length", std::to_string(this->body.length()));
     text.append (this->status_line);
     text.append("\r\n");
     for (std::map<std::string, std::string>::iterator item = this->headers.begin(); item != this->headers.end(); ++item)
@@ -20,6 +23,7 @@ std::string http_response::text()
         text.append(item->first + ": " + item->second);
         text.append("\r\n");
     }
+    
     text.append("\r\n");
     text.append(this->body);
     text.append("\r\n\r\n");
@@ -39,7 +43,8 @@ http_response::http_response (int const status_code)
     
 }
 
-void http_response::add_status(int const status_code, std::string status_message)
+
+void http_response::set_status(int const status_code, std::string status_message)
 {
     this->status_line.clear();
     
@@ -74,13 +79,22 @@ void http_response::add_status(int const status_code, std::string status_message
 }
 
 
-void http_response::add_body (std::string body)
+void http_response::set_body (std::string body)
 {
     this->body = body;
 }
 
 
-void http_response::add_header (std::string name, std::string value)
+void http_response::set_header (std::string name, std::string value)
 {
     this->headers[name] = value;
+}
+
+
+std::string http_response::get_header(std::string header_name)
+{
+    if (this->headers.find(header_name) != this->headers.end())
+        return this->headers[header_name];
+    else return "";
+    
 }

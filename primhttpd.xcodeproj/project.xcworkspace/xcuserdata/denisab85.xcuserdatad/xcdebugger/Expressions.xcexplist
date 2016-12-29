@@ -3,7 +3,50 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GLOBAL">
+         <PersistentStrings>
+            <PersistentString
+               value = "mime_types.size()">
+            </PersistentString>
+            <PersistentString
+               value = "conf">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "start_server(config*):http.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "path_trim_delim(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, TRIM_KIND):utils.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "path_split(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):utils.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "get(http_request*, http_response*):http.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "parse_mime_types(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):utils.cpp">
+      </ContextState>
+      <ContextState
          contextName = "run_http(void*):http.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "start_server(char*, int):http.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "mime_types">
+            </PersistentString>
+            <PersistentString
+               value = "mime_types.size()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "config::read():utils.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "path_parent(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):utils.cpp">
       </ContextState>
       <ContextState
          contextName = "cgi_engine::parse_request(http_request*):cgi.cpp">

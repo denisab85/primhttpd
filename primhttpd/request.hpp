@@ -20,6 +20,7 @@ class http_request
 public:
     http_request();
     bool process(char * const buffer, size_t const len);
+    std::string get_header(std::string header_name);
     
     std::string request_method;
     std::string request_uri;

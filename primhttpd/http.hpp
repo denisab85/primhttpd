@@ -24,9 +24,11 @@
 #include "request.hpp"
 #include "response.hpp"
 #include "cgi.hpp"
+#include <fstream>
+#include <streambuf>
 
 
-bool start_server (char ip_address[15], int tcp_port);
+int start_server (config * _conf);
 void *run_http(void *);
 
 void parse_line(int num, char * line);
@@ -34,5 +36,7 @@ void parse_line(int num, char * line);
 void send_response(int const socket, http_response * response);
 
 bool make_status(char line[1024]);
+
+int get (http_request * request, http_response * response);
 
 #endif /* http_hpp */
